@@ -1,4 +1,7 @@
 h1 {
     font-size: 2em;
     margin: 0.67em 0;
+    text-align: center;
+    flex-direction: row;
+    -ms-flex-align: center;
     }
