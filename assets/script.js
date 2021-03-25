@@ -1,9 +1,22 @@
 var tableBody = document.getElementById('repo-table');
 var fetchButton = document.getElementById('fetch-button');
+var button = document.getElementById('button')
+var inputValue = document.querySelector('.inputValue')
+var name = document.querySelector('.name');
+var desc = document.querySelector('.desc');
+var temp = document.querySelector('.temp');
+
+button.addEventListener('click',function(){
+  fetch('https://api.openweathermap.org/data/2.5/weather?q=' + inputValue.value + '&appid=0005f3f86d450aa28699c2489b4161a4')
+  .then(response => response.json())
+  .then(data => console.log(data))
+
+  .catch(err => alert('Please enter a valid city name'))
+})
 
 function getApi() {
   // fetch request gets a list of all the repos for the node.js organization
-    var requestUrl = 'api.openweathermap.org/data/2.5/forecast?q={city name},{state code}&appid=0005f3f86d450aa28699c2489b4161a4={API key}'
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + inputValue.value + '&appid=0005f3f86d450aa28699c2489b4161a4';
 
     fetch(requestUrl)
     .then(function (response) {
