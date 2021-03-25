@@ -3,7 +3,7 @@ var fetchButton = document.getElementById('fetch-button');
 
 function getApi() {
   // fetch request gets a list of all the repos for the node.js organization
-    var requestUrl = 'https://api.github.com/users/JDavid337/repos';
+    var requestUrl = 'api.openweathermap.org/data/2.5/forecast?q={city name},{state code}&appid=0005f3f86d450aa28699c2489b4161a4={API key}'
 
     fetch(requestUrl)
     .then(function (response) {
