@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <title>Weather App</title>
     <link rel="stylesheet" href="./assets/style.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"></script>
 </head>
 <body>
     <header class="container-fluid p-5 text-center text-white bg-primary">
-        <h1>Weather Dashboard</h1>
+        <h1 class='app-title'>Weather Dashboard</h1>
+        <h6 id="updateTime"></h6>
     </header>
 
     <div class="container-fluid">
@@ -28,30 +28,122 @@
         <section class="card card-rounded col-7 bg-white">
             <header class="card-header text-center">
                 <h3 class="text-blue">
-                    <input id = "button" type="text" class="inputValue"></input>
-                    <input class="btn btn-primary" type="submit" value="submit"></input>
+                    
+                        <form id="cities" class="form-inline my-2 my-lg-0">
+                            <input id = "searchCity" class="inputValue" type="search" placeholder="Search"
+                            aria-label="Search">
+                            <button id = "name" class="btn btn-primary" type="submit">Search</button>
+                        </form>
+                    <div id="cityhistory"></div>
                 </h3>
             </header>
-        <div class="text-center pt-4">
-            <button class="btn btn-danger" id="fetch-button">
-                Click Me
-            </button>
-        </div>
-
-        <div class="container">
-            <div class = "display">
-                <h4 class = "name"></h4>
-                <p class = "desc"></p>
-                <p class = "temp"></p>
+            <div class="text-center pt-4">
+                <button class="btn btn-danger" id="fetch-button">
+                    Click Me
+                </button>
             </div>
+
+            <div class="container">
+                <div class = "display">
+                    <h4 class = "name"></h4>
+                    <p class = "desc"></p>
+                    <p class = "temp"></p>
+                </div>
             <div class="row">
                 <div class="col-md-8"></div>
                 <div class="col-6 col-md-4"></div>
             </div>
 
+            <div class='col-8 float-right'>
+                <section class="card jumbotron bg-light text-dark custom-dash">
+                    <div id="current-city"></div>
+                    <br>
+                    <div id="current-dayweather"></div>
+                    <br>
+                    <div id="current-daytemp"></div>
+                    <br>
+                    <div id="current-daytempfeelslike"></div>
+                    <br>
+                    <div id="current-dayhumid"></div>
+                    <br>
+                    <div id="current-daywind"></div>
+                    <br>
+                    <div id="current-dayuv"></div>
+                </section>
+            <br>
+                <section>
+                    <h4>Five-Day Forecast</h4>
+                        <div id="weekForecast" class="row">
+                            <div class="col-md-4">
+                                <div class="five card text-white bg-primary md-3">
+                                    <div id="day1" class="card-body">
+                                        <div class="card-text">
+                                            <form id="cities" class="form-control mr-sm-2" type="search" placeholder="Search"
+                                            aria-label="Search">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="weekForecast" class="row">
+                            <div class="col-md-4">
+                                <div class="five card text-white bg-primary md-3">
+                                    <div id="day2" class="card-body">
+                                        <div class="card-text">
+                                            <form id="cities" class="form-control mr-sm-2" type="search" placeholder="Search"
+                                            aria-label="Search">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="weekForecast" class="row">
+                        <div class="col-md-4">
+                            <div class="five card text-white bg-primary md-3">
+                                <div id="day3" class="card-body">
+                                    <div class="card-text">
+                                        <form id="cities" class="form-control mr-sm-2" type="search" placeholder="Search"
+                                        aria-label="Search">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="weekForecast" class="row">
+                    <div class="col-md-4">
+                        <div class="five card text-white bg-primary md-3">
+                            <div id="day4" class="card-body">
+                                <div class="card-text">
+                                    <form id="cities" class="form-control mr-sm-2" type="search" placeholder="Search"
+                                    aria-label="Search">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="weekForecast" class="row">
+                <div class="col-md-4">
+                    <div class="five card text-white bg-primary md-3">
+                        <div id="day5" class="card-body">
+                            <div class="card-text">
+                                <form id="cities" class="form-control mr-sm-2" type="search" placeholder="Search"
+                                aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                </section>
+            </div>
+
             <table class="card-body table mx-auto my-4">
                 <th>
-                    <p class="my-4">Results</p>
+                    <p class="my-4">Search history</p>
                 </th>
                 <tbody id="repo-table" class="mx-auto text-center"></tbody>
             </table>
@@ -60,7 +152,9 @@
     </main>
     
     <script src="./assets/script.js"></script>
-
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 </body>
 
